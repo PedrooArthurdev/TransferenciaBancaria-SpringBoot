@@ -1,10 +1,19 @@
 package com.transferencia.bancaria.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "contas")
 public class Conta {
+    @Id
     private String numeroConta;
+
     private double saldo;
     private String tipoConta;
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_cpf")
     private Cliente cliente;
 
     public Conta(String numeroConta, double saldo, String tipoConta, String status, Cliente cliente) {
@@ -13,6 +22,9 @@ public class Conta {
         this.tipoConta = tipoConta;
         this.status = status;
         this.cliente = cliente;
+    }
+
+    public Conta() {
     }
 
     public String getNumeroConta() {
@@ -50,4 +62,6 @@ public class Conta {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+
 }

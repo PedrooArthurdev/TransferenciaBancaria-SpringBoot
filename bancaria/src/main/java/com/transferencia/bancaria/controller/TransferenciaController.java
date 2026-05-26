@@ -27,16 +27,12 @@ public class TransferenciaController {
     }
 
     @PostMapping
-    public String realizarTransferencia(@Valid @RequestBody TransferenciaRequest request) {
-        Cliente cliente1 = new Cliente("02085375111", "Pedro", "Rua 26 norte", LocalDate.of(2003, 7, 25));
-        Cliente cliente2 = new Cliente("05794865233", "Cláudio", "Avenida das palmeiras", LocalDate.of(1985, 4, 16));
-
-        Conta origem = new Conta(request.getContaOrigem(), 5000.00, "Corrente", "Ativa", cliente1);
-        Conta destino = new Conta(request.getContaDestino(), 1000.00, "Corrente", "Ativa", cliente2);
-
-        Transacao transacao = service.realizarTransferencia(origem, destino, request.getValor());
-
-        return "Transferência realizada! Status: " + transacao.getStatus() + " | Valor: R$ " + transacao.getValor();
+    public Transacao realizarTransferencia(@Valid @RequestBody TransferenciaRequest request) {
+        return service.realizarTransferencia(
+                request.getContaOrigem(),
+                request.getContaDestino(),
+                request.getValor()
+        );
     }
 
     @GetMapping("/historico")
