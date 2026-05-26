@@ -1,8 +1,17 @@
 package com.transferencia.bancaria.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class TransferenciaRequest {
+
+    @NotBlank(message = "Conta de origem é obrigatória")
     private String contaOrigem;
+
+    @NotBlank(message = "Conta de destino é obrigatória")
     private String contaDestino;
+
+    @Positive(message = "Valor deve ser positivo")
     private double valor;
 
     public TransferenciaRequest(String contaOrigem, String contaDestino, double valor) {
